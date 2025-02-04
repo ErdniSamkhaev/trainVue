@@ -1,8 +1,10 @@
 <template>
   <h1>Hello Vue and Vite</h1>
+  <!-- Компонент Greeting -->
   <Greeting :name="userName || 'Guest'" />
-  <button @click="increment">Click me</button>
-  <p>Count: {{ count }}</p>
+  <!-- Компонент ButtonCounter вместо старой кнопки -->
+  <ButtonCounter label="Current count" />
+
   <form action="#">
     <input
       type="text"
@@ -19,14 +21,10 @@
 // Импорты
 import { ref } from "vue";
 import Greeting from "./components/Greeting.vue";
+import ButtonCounter from "./components/ButtonCounter.vue";
 
 // Реактивные переменные
-const count = ref(0);
 const userName = ref("");
-// Фнукция инкремент
-function increment() {
-  count.value++;
-}
 </script>
 
 <style scoped></style>
