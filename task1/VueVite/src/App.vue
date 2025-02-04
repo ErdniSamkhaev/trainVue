@@ -9,6 +9,12 @@
     </template>
   </ButtonCounter>
 
+  <!-- Отображаем удвоение значение счетчика -->
+  <p>Double count: {{ counterStore.doubleCount }}</p>
+
+  <!-- Кнопка для сброса счетчика -->
+  <button @click="resetCounter">Reset</button>
+
   <form action="#">
     <input
       type="text"
@@ -26,13 +32,22 @@
 import { ref } from "vue";
 import Greeting from "./components/Greeting.vue";
 import ButtonCounter from "./components/ButtonCounter.vue";
+import { useCounterStore } from "./stores/counter";
 
 // Реактивные переменные
 const userName = ref("");
 
+// Получаем ссылку на хранилище
+const counterStore = useCounterStore();
+
 // Функция обработчик для события increment
 function handleIncrement(newCount) {
   console.log("New count:", newCount);
+}
+
+// Функция для сброса счетчика через действие reset в хранилище
+function resetCounter() {
+  counterStore.reset();
 }
 </script>
 
