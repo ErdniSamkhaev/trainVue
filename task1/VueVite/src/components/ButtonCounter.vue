@@ -1,6 +1,6 @@
 <template>
   <button @click="handleClick">
-    {{ label }}: {{ count }}
+    {{ label }}: {{ counterStore.count }}
     <!-- Именнованный слот для кастомного компонента -->
     <slot name="icon"></slot>
   </button>
@@ -8,7 +8,7 @@
 
 <script setup>
 // Импорты
-import { ref } from "vue";
+import { useCounterStore } from "../stores/counter";
 
 // Пропс label
 const props = defineProps({
@@ -20,14 +20,15 @@ const props = defineProps({
 
 // Определяем событие increment через defineEmits
 const emit = defineEmits(["increment"]);
-// Внутренний счетчик копмонента
-const count = ref(0);
+
+// Получаем ссылку на хранилище
+const counterStore = useCounterStore();
 
 // Функция обработки клика
 // увеличиваем счетчик и эмитим событие increment с текущим значением
 function handleClick() {
-  count.value++;
-  emit("increment", count.value);
+  counterStore.increment();
+  emit("increment", counterStore.count);
 }
 </script>
 
