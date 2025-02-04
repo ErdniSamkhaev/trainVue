@@ -10,7 +10,7 @@
 // Импорты
 import { useCounterStore } from "../stores/counter";
 
-// Пропс label
+// Пропс label объектно (сторока обязательная)
 const props = defineProps({
   label: {
     type: String,

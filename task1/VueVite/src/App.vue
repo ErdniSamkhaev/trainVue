@@ -1,7 +1,9 @@
 <template>
   <h1>Hello Vue and Vite</h1>
+
   <!-- Компонент Greeting -->
   <Greeting :name="userName || 'Guest'" />
+
   <!-- Компонент ButtonCounter  с именнованным слотом и слушателем -->
   <ButtonCounter label="Clicks" @increment="handleIncrement">
     <template #icon>
@@ -12,8 +14,17 @@
   <!-- Отображаем удвоение значение счетчика -->
   <p>Double count: {{ counterStore.doubleCount }}</p>
 
-  <!-- Кнопка для сброса счетчика -->
+  <!-- Кнопка для сброса счетчика reset-->
   <button @click="resetCounter">Reset</button>
+
+  <!-- Список истории -->
+  <h3>History</h3>
+  <ul class="history">
+    <li v-for="(item, index) in counterStore.history" :key="index">
+      {{ item }}
+    </li>
+  </ul>
+  <p>Last History Item: {{ counterStore.lastHistoryItem }}</p>
 
   <form action="#">
     <input
@@ -51,4 +62,10 @@ function resetCounter() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.history {
+  list-style-type: none;
+  display: flex;
+  gap: 5px;
+}
+</style>
