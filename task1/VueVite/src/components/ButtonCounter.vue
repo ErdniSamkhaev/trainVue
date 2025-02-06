@@ -6,20 +6,17 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Импорты
 import { useCounterStore } from "../stores/counter";
 
-// Пропс label объектно (сторока обязательная)
-const props = defineProps({
-  label: {
-    type: String,
-    required: true,
-  },
-});
+// Пропс label (сторока обязательная)
+defineProps<{ label: string }>();
 
 // Определяем событие increment через defineEmits
-const emit = defineEmits(["increment"]);
+const emit = defineEmits<{
+  (e: "increment", count: number): void;
+}>();
 
 // Получаем ссылку на хранилище
 const counterStore = useCounterStore();
