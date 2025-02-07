@@ -11,11 +11,18 @@
 import { useCounterStore } from "../stores/counter";
 
 // Пропс label (сторока обязательная)
-defineProps<{ label: string }>();
+defineProps<{
+  label: string;
+}>();
 
-// Определяем событие increment через defineEmits
-const emit = defineEmits<{
-  (e: "increment", count: number): void;
+// Типизация эмитов
+defineEmits<{
+  increment: [count: number];
+}>();
+
+// Типизация слотов
+defineSlots<{
+  icon?: (props: {}) => any;
 }>();
 
 // Получаем ссылку на хранилище
@@ -25,7 +32,6 @@ const counterStore = useCounterStore();
 // увеличиваем счетчик и эмитим событие increment с текущим значением
 function handleClick() {
   counterStore.increment();
-  emit("increment", counterStore.count);
 }
 </script>
 

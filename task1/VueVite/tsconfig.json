@@ -8,8 +8,11 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
     "lib": ["ESNext", "DOM"],
-    "types": ["vite/client", "node", "@types/node"],
+    "types": ["vite/client", "node", "@types/node", "vue"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
