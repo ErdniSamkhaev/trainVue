@@ -1,35 +1,35 @@
 import { defineStore } from "pinia";
+import { ref, computed } from "vue";
 
-interface CounterState {
-  count: number;
-  history: number[];
-}
+// Создание хранилища
+export const useCounterStore = defineStore("counter", () => {
+  // Инициализация состояния
+  const count = ref<number>(0);
+  const history = ref<number[]>([]);
 
-export const useCounterStore = defineStore("counter", {
-  state: (): CounterState => ({
-    count: 0,
-    history: [],
-  }),
-  getters: {
-    doubleCount(state): number {
-      return state.count * 2;
-    },
-    lastHistoryItem(state): number | null {
-      return state.history.length
-        ? state.history[state.history.length - 1]
-        : null;
-    },
-  },
-  actions: {
-    increment(): void {
-      this.count++;
-      // Добавляем копию count в history чтобы избежать реактивных ссылок
-      // делаем глубокую копию с помощью (JSON.parse(JSON.stringify(...))
-      const countCopy = JSON.parse(JSON.stringify(this.count));
-      this.history.push(countCopy);
-    },
-    reset(): void {
-      this.count = 0;
-    },
-  },
+  // Геттеры
+  const doubleCount = computed(() => count.value * 2);
+  const lastHistoryItem = computed<number | null>(() =>
+    history.value.length ? history.value[history.value.length - 1] : null
+  );
+
+  // Действия
+  function increment(): void {
+    count.value++;
+    // Глубокое копирование
+    const countCopy = JSON.parse(JSON.stringify(count.value));
+    history.value.push(countCopy);
+  }
+  function reset(): void {
+    count.value = 0;
+  }
+  // Возвращаем состояние
+  return {
+    count,
+    history,
+    doubleCount,
+    lastHistoryItem,
+    increment,
+    reset,
+  };
 });

@@ -1,4 +1,5 @@
 <template>
+  <!-- Кнопка и обрабатываем клик 'v-on:click'- сокращенно @click -->
   <button @click="handleClick">
     {{ label }}: {{ counterStore.count }}
     <!-- Именнованный слот для кастомного компонента -->
@@ -6,8 +7,10 @@
   </button>
 </template>
 
+<!-- composition API -->
 <script setup lang="ts">
 // Импорты
+// useCounterStore функция создания экземпляра хранилища
 import { useCounterStore } from "../stores/counter";
 
 // Пропс label (сторока обязательная)
@@ -16,8 +19,8 @@ defineProps<{
 }>();
 
 // Типизация эмитов
-defineEmits<{
-  increment: [count: number];
+const emit = defineEmits<{
+  (e: "increment", count: number): void;
 }>();
 
 // Типизация слотов
@@ -28,10 +31,11 @@ defineSlots<{
 // Получаем ссылку на хранилище
 const counterStore = useCounterStore();
 
-// Функция обработки клика
-// увеличиваем счетчик и эмитим событие increment с текущим значением
+// Функция вызывает метод increment из хранилища
+// которая автоматически обновляет реактивную переменную count
 function handleClick() {
   counterStore.increment();
+  emit("increment", counterStore.count);
 }
 </script>
 

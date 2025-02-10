@@ -38,23 +38,23 @@
   <p v-if="userName">Username: {{ userName }}</p>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // Импорты
-import { ref } from "vue";
 import Greeting from "./components/Greeting.vue";
 import ButtonCounter from "./components/ButtonCounter.vue";
 import { useCounterStore } from "./stores/counter";
+import { useInput } from "./composables/useInput";
 
 // Реактивные переменные
-const userName = ref("");
+const { value: userName } = useInput();
 
 // Получаем ссылку на хранилище
 const counterStore = useCounterStore();
 
-// Функция обработчик для события increment
-function handleIncrement(newCount) {
+//обработчик для события increment
+const handleIncrement = (newCount: number) => {
   console.log("New count:", newCount);
-}
+};
 
 // Функция для сброса счетчика через действие reset в хранилище
 function resetCounter() {
