@@ -39,4 +39,9 @@ function handleClick() {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+
+button {
+  @include button-style($primary-color);
+}
+</style>

@@ -67,19 +67,55 @@ function resetCounter() {
 </script>
 
 <style scoped lang="scss">
-@import "../src/assets/styles/main.scss";
-
 .history {
   list-style-type: none;
   display: flex;
   gap: 5px;
-}
+  padding: 0;
 
-.counter-btn {
-  background-color: $primary-color;
+  // Вложенность для элементов списка
+  li {
+    background-color: color.adjust($primary-color, $lightness: 10%);
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+  input {
+    background: linear-gradient(
+      90deg,
+      color.adjust($primary-color, $lightness: 20%),
+      color.adjust($secondary-color, $lightness: 20%)
+    );
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    flex-direction: column;
+    gap: 3px;
+  }
 }
 
 .reset {
-  background-color: $secondary-color;
+  @include button-style($secondary-color);
+  margin-top: 10px;
+}
+
+form {
+  margin: 20px 0;
+
+  input {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(
+      90deg,
+      color.adjust($primary-color, $lightness: 20%),
+      color.adjust($secondary-color, $lightness: 20%)
+    );
+    transition: all 0.3s;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px $primary-color;
+    }
+  }
 }
 </style>

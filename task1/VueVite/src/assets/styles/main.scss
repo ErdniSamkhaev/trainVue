@@ -1,2 +1,40 @@
+@use "sass:color";
+
+// Для брейкпоинтов
+$mobile-breakpoint: 768px;
 $primary-color: #42b883;
 $secondary-color: #35495e;
+
+// Миксин для стилизации кнопок
+@mixin button-style($bg-color) {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: color.adjust($bg-color, $lightness: 5%);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+
+  &:hover {
+    opacity: 0.9;
+    animation: pulse 0.5s ease-in-out; // Новая анимация
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+// Анимация pulse (добавить в конец файла)
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
