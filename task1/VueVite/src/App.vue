@@ -5,7 +5,11 @@
   <Greeting :name="userName || 'Guest'" />
 
   <!-- Компонент ButtonCounter  с именнованным слотом и слушателем -->
-  <ButtonCounter label="Clicks" @increment="handleIncrement">
+  <ButtonCounter
+    class="counter-btn"
+    label="Clicks"
+    @increment="handleIncrement"
+  >
     <template #icon>
       <span style="color: green">(+)</span>
     </template>
@@ -15,7 +19,7 @@
   <p>Double count: {{ counterStore.doubleCount }}</p>
 
   <!-- Кнопка для сброса счетчика reset-->
-  <button @click="resetCounter">Reset</button>
+  <button class="reset" @click="resetCounter">Reset</button>
 
   <!-- Список истории -->
   <h3>History</h3>
@@ -62,10 +66,20 @@ function resetCounter() {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../src/assets/styles/main.scss";
+
 .history {
   list-style-type: none;
   display: flex;
   gap: 5px;
+}
+
+.counter-btn {
+  background-color: $primary-color;
+}
+
+.reset {
+  background-color: $secondary-color;
 }
 </style>
